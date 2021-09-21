@@ -1,5 +1,5 @@
 const POSTS_URL = process.env.REACT_APP_BE_URL_POSTS
-
+//something 
 // GET POSTS
 export const getPosts = async () => {
   try {
