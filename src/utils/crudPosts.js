@@ -1,4 +1,5 @@
-const POSTS_URL = process.env.REACT_APP_BE_URL_POSTS
+const URL = process.env.REACT_APP_BE_URL
+const POSTS_URL = `${URL}/posts`
 //something 
 // GET POSTS
 export const getPosts = async () => {
