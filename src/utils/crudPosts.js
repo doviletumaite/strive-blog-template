@@ -1,4 +1,4 @@
-const POSTS_URL = "http://localhost:3002/posts";
+const POSTS_URL = process.env.REACT_APP_BE_URL_POSTS
 
 // GET POSTS
 export const getPosts = async () => {
