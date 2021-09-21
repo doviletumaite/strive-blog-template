@@ -1,9 +1,10 @@
 const URL = process.env.REACT_APP_BE_URL
 const POSTS_URL = `${URL}/posts`
-//something 
+
 // GET POSTS
 export const getPosts = async () => {
   try {
+    console.log(process.env)
     const response = await fetch(`${POSTS_URL}`)
 
     if (response.ok) {
