@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import { getPosts } from "../../utils/crudPosts";
-
 import "./styles.css";
-class Blog extends Component {
-  state = {
-    posts: [],
-    loading: true,
-  };
+
+const Blog = () => {
+
   // componentDidMount() {
   //   const { id } = this.props.match.params;
   //   console.log(posts);
@@ -31,33 +28,51 @@ class Blog extends Component {
   //    }
     
   // }
-  render() {
-    const { loading, posts } = this.state;
-    if (loading) {
-      return <div>loading</div>;
-    } else {
-      return (
-        <div className="blog-details-root">
-          <Container>
-            <Image className="blog-details-cover" src={posts.cover} fluid />
-            <h1 className="blog-details-title">{posts.title}</h1>
 
-            <div className="blog-details-container">
-              <div className="blog-details-author">
-                <BlogAuthor {...posts.author} />
-              </div>
-              <div className="blog-details-info">
-                <div>{posts.createdAt}</div>
-                <div>{`${posts.readTime.value} ${posts.readTime.unit} read`}</div>
-              </div>
-            </div>
-
-            <div dangerouslySetInnerHTML={{ __html: posts.content }}></div>
-          </Container>
-        </div>
-      );
+   const [post, setPost] = useState([])
+   const fetchPosts = async () => {
+    try {
+     let posts = await getPosts()
+     setPost(posts)
+    } catch (error) {
+      throw error
     }
   }
-}
+ 
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+    // const { loading, posts } = this.state;
+    // if (loading) {
+    //   return <div>loading</div>;
+    // } else {
+      return (
+        <>
+       {post.map((post) => 
+        <div className="blog-details-root">
+        <Container>
+          <Image className="blog-details-cover" src={post.cover} fluid />
+          <h1 className="blog-details-title">{post.title}</h1>
+
+          <div className="blog-details-container">
+            <div className="blog-details-author">
+              <BlogAuthor {...post.author} />
+            </div>
+            <div className="blog-details-info">
+              <div>{post.createdAt}</div>
+              <div>{`${post.readTime.value} ${post.readTime.unit} read`}</div>
+            </div>
+          </div>
+
+          <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+        </Container>
+      </div>
+        )}
+        </>
+      );
+    }
+  
+
 
 export default withRouter(Blog);
