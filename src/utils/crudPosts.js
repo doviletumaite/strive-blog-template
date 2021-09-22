@@ -6,7 +6,7 @@ export const getPosts = async () => {
   try {
    console.log(POSTS_URL)
     const response = await fetch(`${POSTS_URL}`)
-  
+    console.log("response")
     if (response.ok) {
       const posts = await response.json();
       console.log(posts)
