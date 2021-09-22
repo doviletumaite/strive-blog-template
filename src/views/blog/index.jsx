@@ -55,11 +55,11 @@ const Blog = ({ match }) => {
     fileFormData.append("picture", file)
     const uploadPicture = async (id) => {
       try {
-       let response = await fetch (`${URL}/uploadPicture/${id}`, {
+       let response = await fetch (`${URL}/file/uploadPicture/${id}`, {
          method: "PUT", 
          body: fileFormData,
        })
-       getPosts(id)
+      //  getPosts(id)
       } catch (error) {
         console.log(error)
       }
@@ -96,9 +96,8 @@ const Blog = ({ match }) => {
               onClick={() => setOpen(true)}
               size="lg"
               variant="dark"
-              style={{ margin: "1em" }}
+              className="m-5"
             >
-              {" "}
               Upload Cover
             </Button>
 
@@ -121,7 +120,7 @@ const Blog = ({ match }) => {
                 <Form.Label></Form.Label>
                 <Form.Control
                   onChange={(e) => {
-                    const file = e.target.files[0];
+                    const file = e.target.picture[0];
                     setFile(file);
                   }}
                   accept="image/*"
