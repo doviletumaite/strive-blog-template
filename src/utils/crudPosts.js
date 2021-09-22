@@ -4,7 +4,7 @@ const POSTS_URL = `${URL}/posts`
 // GET POSTS
 export const getPosts = async () => {
   try {
-    console.log(process.env)
+   
     const response = await fetch(`${POSTS_URL}`)
 
     if (response.ok) {
