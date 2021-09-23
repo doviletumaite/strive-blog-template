@@ -77,7 +77,10 @@ const Blog = ({ match }) => {
       
         <div className="blog-details-root">
         <Container>
-          <Image className="blog-details-cover" src={post.cover} fluid />
+          <>
+          {post.map((post) => ( 
+            <div>
+         <Image className="blog-details-cover" src={post.cover} fluid />
           <h1 className="blog-details-title">{post.title}</h1>
 
           <div className="blog-details-container">
@@ -86,11 +89,15 @@ const Blog = ({ match }) => {
             </div>
             <div className="blog-details-info">
               <div>{post.createdAt}</div>
-              {/* <div>{`${post.readTime.value} ${post.readTime.unit} read`}</div> */}
+             <div>{`${post.readTime.value} ${post.readTime.unit} read`}</div> 
             </div>
           </div>
 
           <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+             </div>
+          )
+             )}
+          </>
 
           <Button
               onClick={() => setOpen(true)}
