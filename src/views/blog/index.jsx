@@ -38,8 +38,13 @@ const Blog = ({ match }) => {
    const fetchPosts = async (id) => {
     try {
      let posts = await getPosts(id)
-     setPost(posts)
-     setLoading(false)
+     const post = posts.find((post) => post.id.toString == id)
+     console.log(post)
+     if (post) {
+        console.log("that post", post)
+       setPost(post)
+       setLoading(false)
+     }
     } catch (error) {
       throw error
     }
@@ -78,7 +83,8 @@ const Blog = ({ match }) => {
         <div className="blog-details-root">
         <Container>
           <>
-          {post.map((post) => ( 
+        
+          {/* {post.map((post) => (  */}
             <div>
          <Image className="blog-details-cover" src={post.cover} fluid />
           <h1 className="blog-details-title">{post.title}</h1>
@@ -89,14 +95,15 @@ const Blog = ({ match }) => {
             </div>
             <div className="blog-details-info">
               <div>{post.createdAt}</div>
-             <div>{`${post.readTime.value} ${post.readTime.unit} read`}</div> 
+             <div>{`${post.readTime} ${post.readTime} read`}</div> 
             </div>
           </div>
 
           <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
              </div>
-          )
-             )}
+            
+          {/* )
+             )} */}
           </>
 
           <Button
